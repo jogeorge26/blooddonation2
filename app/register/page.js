@@ -211,20 +211,20 @@ const DonorRegistration = () => {
                 <option value="" disabled>
                   Select your district
                 </option>
-                <option value="Alappuzha">Alappuzha</option>
-                <option value="Ernakulam">Ernakulam</option>
-                <option value="Idukki">Idukki</option>
-                <option value="Kannur">Kannur</option>
-                <option value="Kasaragod">Kasaragod</option>
-                <option value="Kollam">Kollam</option>
-                <option value="Kottayam">Kottayam</option>
-                <option value="Malappuram">Malappuram</option>
-                <option value="Palakkad">Palakkad</option>
-                <option value="Pathanamthitta">Pathanamthitta</option>
-                <option value="Quilon">Quilon (Kollam)</option>
-                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-                <option value="Thrissur">Thrissur</option>
-                <option value="Wayanad">Wayanad</option>
+                <option value="alappuzha">Alappuzha</option>
+                <option value="ernakulam">Ernakulam</option>
+                <option value="idukki">Idukki</option>
+                <option value="kannur">Kannur</option>
+                <option value="kasaragod">Kasaragod</option>
+                <option value="kollam">Kollam</option>
+                <option value="kottayam">Kottayam</option>
+                <option value="kozhikode">Kozhikode</option>
+                <option value="malappuram">Malappuram</option>
+                <option value="palakkad">Palakkad</option>
+                <option value="pathanamthitta">Pathanamthitta</option>
+                <option value="thrissur">Thrissur</option>
+                <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="wayanad">Wayanad</option>
               </select>
             </div>
 
