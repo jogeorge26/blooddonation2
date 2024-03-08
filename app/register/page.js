@@ -1,18 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { useRouter } from "next/navigation";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+} from "firebase/auth";
 //import { useHistory } from 'react-router-dom';
 
 const DonorRegistration = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    DOB: "",
     bloodGroup: "",
     lastDonationDate: "",
-    DOB: "",
+    addr1: "",
+    secAddr: "",
+    city: "",
+    district: "",
+    pincode: "",
   });
-
-  //const history = useHistory();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,9 +36,10 @@ const DonorRegistration = () => {
     e.preventDefault();
     // Perform form validation and submission logic here
     console.log(formData);
+    alert("Registration Submitted Successfully!");
+    router.push("/login");
     //history.push('/dashboard'); // Redirect to dashboard after successful registration
   };
-
 
   return (
     <div class="container m-auto bg-red-500 text-white p-4">
@@ -32,7 +47,7 @@ const DonorRegistration = () => {
       <form onSubmit={handleSubmit} class="mt-4">
         <div class="flex flex-wrap -mx-2">
           <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="name" class="block">
+            <label htmlFor="name" class="block">
               Name
             </label>
             <input
@@ -46,7 +61,7 @@ const DonorRegistration = () => {
             />
           </div>
           <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="email" class="block">
+            <label htmlFor="email" class="block">
               Email
             </label>
             <input
@@ -62,7 +77,7 @@ const DonorRegistration = () => {
         </div>
         <div class="flex flex-wrap -mx-2">
           <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="phone" class="block">
+            <label htmlFor="phone" class="block">
               Phone
             </label>
             <input
@@ -75,8 +90,25 @@ const DonorRegistration = () => {
               class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
             />
           </div>
+
           <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="bloodGroup" class="block">
+            <label htmlFor="DOB" class="block">
+              Date of Birth
+            </label>
+            <input
+              id="DOB"
+              type="date"
+              name="DOB"
+              value={formData.DOB}
+              onChange={handleChange}
+              required
+              class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-2">
+          <div class="w-full md:w-1/2 px-2 mb-4">
+            <label htmlFor="bloodGroup" class="block">
               Blood Group
             </label>
             <select
@@ -100,10 +132,9 @@ const DonorRegistration = () => {
               <option value="O-">O-</option>
             </select>
           </div>
-        </div>
-        <div class="flex flex-wrap -mx-2">
+
           <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="lastDonationDate" class="block">
+            <label htmlFor="lastDonationDate" class="block">
               Last Donation Date
             </label>
             <input
@@ -116,96 +147,113 @@ const DonorRegistration = () => {
               class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
             />
           </div>
-          <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="DOB" class="block">
-              Date of Birth
-            </label>
-            <input
-              id="DOB"
-              type="date"
-              name="DOB"
-              value={formData.DOB}
-              onChange={handleChange}
-              required
-              class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
-            />
-          </div>
+
           <div class="w-full md:w-1/2 px-2 mb-4"></div>
         </div>
+        {/* new  */}
+
+        {/* Addit info of Donor */}
         <div class="container bg-red-500 text-white p-4">
           <h1 class="text-center text-3xl">Additional Information</h1>
-          <label for="address" class="block">
+
+          <label htmlFor="address" class="block">
             Address Line 1
           </label>
           <textarea
-            id="address_line1"
+            id="address"
             type="text"
             rows="3"
-            name="address_line1 "
-            value={formData.address}
+            name="addr1"
+            value={formData.addr1}
             onChange={handleChange}
             required
             class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
           />
-          <label for="Secondary_address" class="block">
-            SecondaryAddress 
+          <label htmlFor="Secondary_address" class="block">
+            SecondaryAddress
           </label>
           <textarea
             id="SecondaryAddress"
             type="text"
-            name="SecondaryAddress"
-            value={formData.address}
+            name="secAddr"
+            value={formData.secAddr}
             onChange={handleChange}
             required
             class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
           />
 
-          <label for="street" class="block">
-            street
-          </label>
-          <textarea
-            id="street"
-            type="text"
-            name="street"
-            value={formData.street}
-            onChange={handleChange}
-            required
-            class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
-          />
-
-          <label for="City" class="block">
-            City
+          <label htmlFor="city" class="block">
+            city
           </label>
           <textarea
             id="city"
             type="text"
             name="city"
-            value={formData.street}
+            value={formData.city}
             onChange={handleChange}
             required
             class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
           />
 
-          <label for="PINCODE" class="block">
-            Pincode
-          </label>
-          <textarea
-            id="Pincode"
-            type="number"
-            name="Pincode"
-            value={formData.street}
-            onChange={handleChange}
-            required
-            class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
-          />
+          <div class="flex flex-wrap -mx-2">
+            <div class="w-full md:w-1/2 px-2 mb-4">
+              <label htmlFor="district" class="block">
+                District
+              </label>
+              <select
+                id="district"
+                name="district"
+                value={formData.district}
+                onChange={handleChange}
+                required
+                class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
+              >
+                <option value="" disabled>
+                  Select your district
+                </option>
+                <option value="Alappuzha">Alappuzha</option>
+                <option value="Ernakulam">Ernakulam</option>
+                <option value="Idukki">Idukki</option>
+                <option value="Kannur">Kannur</option>
+                <option value="Kasaragod">Kasaragod</option>
+                <option value="Kollam">Kollam</option>
+                <option value="Kottayam">Kottayam</option>
+                <option value="Malappuram">Malappuram</option>
+                <option value="Palakkad">Palakkad</option>
+                <option value="Pathanamthitta">Pathanamthitta</option>
+                <option value="Quilon">Quilon (Kollam)</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Thrissur">Thrissur</option>
+                <option value="Wayanad">Wayanad</option>
+              </select>
+            </div>
+
+            <div class="w-full md:w-1/2 px-2 mb-4">
+              <label htmlFor="pincode" class="block">
+                Pincode
+              </label>
+              <input
+                id="pincode"
+                type="number"
+                name="pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                required
+                class="input-field col s6 w-full bg-red-100 text-red-800 border border-red-500 rounded p-2"
+              />
+            </div>
+
+            <div class="w-full md:w-1/2 px-2 mb-4"></div>
+          </div>
         </div>
 
         <button
+          onClick={handleSubmit}
           class="btn bg-white text-red-500 hover:bg-red-500 hover:text-white py-2 px-4 rounded"
           type="submit"
           name="action"
         >
-          Submit
+          Register
         </button>
       </form>
     </div>
