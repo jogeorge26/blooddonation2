@@ -25,6 +25,7 @@ const DonorRegistration = () => {
     //history.push('/dashboard'); // Redirect to dashboard after successful registration
   };
 
+
   return (
     <div class="container m-auto bg-red-500 text-white p-4">
       <h1 class="text-center text-3xl">Donor Registration</h1>

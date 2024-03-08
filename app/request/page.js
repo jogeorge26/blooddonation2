@@ -2,18 +2,38 @@
 import React from "react";
 import { useState } from "react";
 
-function BloodDonorConnectPage() {
+function BloodRequestPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    bloodGroup: "",
-    lastDonationDate: "",
-    DOB: "",
+    bloodgroup: "",
+    unite: "",
+    urgency: "",
+    date: "",
+    time: "",
+    rname: "",
+    rnumber: "",
+    raddr: "",
+    hospitalname: "",
+    hospitaladdr: "",
+    district: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const submitHandel = (e) => {
+    alert("Your request has been submitted successfully");
+    console.log(formData.bloodgroup);
+    console.log(formData.unite);
+    console.log(formData.urgency);
+    console.log(formData.date);
+    console.log(formData.time);
+    console.log(formData.rname);
+    console.log(formData.raddr);
+    console.log(formData.rnumber);
+    console.log(formData.hospitalname);
+    console.log(formData.hospitaladdr);
+    console.log(formData.district);
   };
 
   return (
@@ -26,6 +46,8 @@ function BloodDonorConnectPage() {
               Blood Type:
             </label>
             <select
+              onChange={handleChange}
+              name="bloodgroup"
               id="bloodType"
               className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
@@ -41,59 +63,90 @@ function BloodDonorConnectPage() {
             </select>
           </div>
           <div className="flex items-center">
-            <label htmlFor="rhFactor" className="mr-2 text-gray-700">
-              RH Factor:
-            </label>
-            <select
-              id="unit"
-              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">All</option>
-              <option value="positive">Positive</option>
-              <option value="negative">Negative</option>
-            </select>
-          </div>
-          <div className="flex items-center">
-            <h3 className="text-base font-bold text-gray-800 mr-2">Urgency:</h3>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-1 px-2 rounded shadow-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
-                value="all"
-              >
-                All
-              </button>
-              <button
-                type="button"
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-1 px-2 rounded shadow-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
-                value="urgent"
-              >
-                Urgent
-              </button>
-              <button
-                type="button"
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-1 px-2 rounded shadow-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
-                value="normal"
-              >
-                Normal
-              </button>
-            </div>
-          </div>
-          {/* Time */}
-          <div class="w-full md:w-1/2 px-2 mb-4">
-            <label for="lastDonationDate" class="block">
-              Date and Time
+            <label htmlFor="unit" className="mr-2 text-gray-700">
+              Unit Required:
             </label>
             <input
-              id="lastDonationDate"
-              type="datetime-local"
-              name="lastDonationDate"
-              value={formData.DOB}
+              id="unit"
+              type="number" // Use type="number" for numeric input
+              name="unite" // Name changed to "unit"
+              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               onChange={handleChange}
-              required
-              class="input-field col s6 w-full text-black border border-gray-500 rounded p-2"
+              min="0" // Set minimum value to 0 (positive number)
+              required // Make the input required
             />
           </div>
+
+          <div className="flex items-center">
+            <h3 className="text-base font-bold text-gray-800 mr-2">Urgency:</h3>
+            <select
+              id="urgency"
+              name="urgency"
+              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              onChange={handleChange}
+            >
+              <option value="">Select Urgency</option>
+              <option value="urgent">Urgent</option>
+              <option value="normal">Normal</option>
+            </select>
+          </div>
+
+          {/* Time */}
+          <div className="flex flex-col w-full md:w-1/2 px-2 mb-4">
+            <label htmlFor="date" className="block text-gray-700 mb-2">
+              Date
+            </label>
+            <input
+              id="date"
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="w-full rounded border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+            <label htmlFor="time" className="block text-gray-700 mt-2">
+              Time
+            </label>
+            <input
+              id="time"
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              required
+              className="w-full rounded border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          {/* Diatrict selection */}
+          <div className="flex items-center">
+            <label htmlFor="district" className="mr-2 text-gray-700">
+              District:
+            </label>
+            <select
+              id="district"
+              name="district"
+              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              onChange={handleChange}
+            >
+              <option value="">Select District</option>
+              <option value="alappuzha">Alappuzha</option>
+              <option value="ernakulam">Ernakulam</option>
+              <option value="idukki">Idukki</option>
+              <option value="kannur">Kannur</option>
+              <option value="kasaragod">Kasaragod</option>
+              <option value="kollam">Kollam</option>
+              <option value="kottayam">Kottayam</option>
+              <option value="kozhikode">Kozhikode</option>
+              <option value="malappuram">Malappuram</option>
+              <option value="palakkad">Palakkad</option>
+              <option value="pathanamthitta">Pathanamthitta</option>
+              <option value="thrissur">Thrissur</option>
+              <option value="thiruvananthapuram">Thiruvananthapuram</option>
+              <option value="wayanad">Wayanad</option>
+            </select>
+          </div>
+
           {/* Additional filter options can be added here */}
           <div className="flex flex-col gap-8">
             <h3 className="text-base font-bold text-gray-800 mr-2">
@@ -107,7 +160,9 @@ function BloodDonorConnectPage() {
                 <input
                   type="text"
                   id="recipientName"
-                  name="recipientName"
+                  name="rname"
+                  value={formData.rname}
+                  onChange={handleChange}
                   className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
@@ -118,8 +173,10 @@ function BloodDonorConnectPage() {
                 </label>
                 <input
                   type="tel"
+                  value={formData.rnumber}
+                  onChange={handleChange}
                   id="recipientPhone"
-                  name="recipientPhone"
+                  name="rnumber"
                   className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
@@ -131,8 +188,10 @@ function BloodDonorConnectPage() {
                   Address:
                 </label>
                 <textarea
+                  value={formData.raddr}
+                  onChange={handleChange}
                   id="recipientAddress"
-                  name="recipientAddress"
+                  name="raddr"
                   rows="3"
                   className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 ></textarea>
@@ -142,9 +201,11 @@ function BloodDonorConnectPage() {
                   Hosptial Name:
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.hospitalname}
                   type="text"
                   id="HosptialName"
-                  name="HosptialName"
+                  name="hospitalname"
                   rows="3"
                   className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
@@ -157,8 +218,10 @@ function BloodDonorConnectPage() {
                   Hosptial Address:
                 </label>
                 <textarea
+                  onChange={handleChange}
+                  value={formData.hospitaladdr}
                   id="HosptialAddress"
-                  name="HosptialAddress"
+                  name="hospitaladdr"
                   rows="3"
                   className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 ></textarea>
@@ -171,6 +234,8 @@ function BloodDonorConnectPage() {
           </div>
         </div>
         <button
+          // onSubmit={submitHandel}
+          onClick={submitHandel}
           type="submit"
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
@@ -181,4 +246,4 @@ function BloodDonorConnectPage() {
   );
 }
 
-export default BloodDonorConnectPage;
+export default BloodRequestPage;
