@@ -1,66 +1,104 @@
 "use client";
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/navigation";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app, { db } from "../firebase"; // Import Firebase app
+import { AuthProvider, AuthContext } from "../context/AuthContext";
 
 function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const auth = getAuth(app);
+  const { userId, setUser, setUserData } = useContext(AuthContext);
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Replace this with Firebase authentication logic
-    // using email and password entered by the user
     try {
-      // Handle successful login
-    } catch (error) {
-      // Handle login error
-      console.error(error);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // Retrieve user data after successful login
+      const userId = userCredential.user.uid;
+      const userEmail = userCredential.user.email;
+      console.log("user id", userId);
+      //const userDoc = await (await db.collection("donors").doc(userId)).get(); // Fetch user document
+      //console.log("USER DOC: ", userDoc.data());
+      //const donorData = userDoc.data();
+
+      if (userId != "") {
+        console.log("Setting data", userId);
+        const userData = {
+          donorId: userId.toString(),
+          email: userEmail.toString(),
+          name: "name",
+        };
+
+        alert(`Redirecting to profile${userId}`);
+        setUserData(userData);
+        router.push("/profile", { userId }); // Pass user name as query parameter
+      } else {
+        console.error("User not found");
+        setError("An error occurred. Please try again.");
+      }
+
+      //router.push("/profile"); // Redirect to profile page
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.message); // Set error message for display
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="w-full max-w-sm mx-auto bg-white rounded shadow-md p-4">
-        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
-        <form onSubmit={handleLogin}>
+    <AuthProvider>
+      <div className="max-w-md mx-auto rounded-lg shadow-md overflow-hidden bg-white py-4 px-8">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Donor Login</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 mb-2">
-              Email Address
+              Email:
             </label>
             <input
-              type="email"
               id="email"
+              type="email"
+              name="email"
+              className="w-full rounded shadow-md p-2 focus:outline-none focus-ring-1 focus:ring-blue-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             />
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-700 mb-2">
-              Password
+              Password:
             </label>
             <input
-              type="password"
               id="password"
+              type="password"
+              name="password"
+              className="w-full rounded shadow-md p-2 focus:outline-none focus-ring-1 focus:ring-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded shadow-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             />
           </div>
-          <Link
-            href="/profile"
-          
-            // type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md"
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Login
-          </Link>
+          </button>
         </form>
+        {error && (
+          <p className="text-red-500">Error(auth / invalid - credential)</p>
+        )}
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 

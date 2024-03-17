@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addDoc, collection } from "firebase/firestore";
 import app, { db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 import {
   getAuth,
@@ -13,7 +14,7 @@ import {
 } from "firebase/auth";
 //import { useHistory } from 'react-router-dom';
 
-const DonorRegistration = ({uidDonor}) => {
+const DonorRegistration = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -62,9 +63,12 @@ const DonorRegistration = ({uidDonor}) => {
       const donorRef = collection(db, "donors"); // Reference to donors collection
       alert(uid);
 
+      //for set
+      const donorSetRef = doc(db, "donors", uid);
+
       try {
         // Wrap addDoc in a try-catch block
-        await addDoc(donorRef, formData, { docId: uid }); // Add donor data as a document with uid as docId
+        await setDoc(donorSetRef, formData); // Add donor data as a document with uid as docId
         //await setDoc(donorRef, formData, { docId: uid }); // Add donor data as a document with uid as docId
         console.log("Registration successful!");
         alert("Registration Successful! Please verify your email.");

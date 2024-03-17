@@ -41,9 +41,6 @@ export default function Navbar2() {
         <li className="mb-2 pt-2 pb-1 pr-4 pl-4 border-b border-gray-200 text-center hover:bg-gray-100 text-black">
           <Link href="/">Home</Link>
         </li>
-        <li className="mb-2 pt-2 pb-1 pr-4 pl-4 border-b border-gray-200 text-center hover:bg-gray-100 text-black">
-          <Link href="/explore">Explore</Link>
-        </li>
         <li className="text-center hover:bg-gray-100 text-black pt-2 pb-1 pr-4 pl-4 rounded-full bg-gray-200 hover:bg-red-500">
           <Link href="/login">Login</Link>
         </li>
@@ -53,11 +50,6 @@ export default function Navbar2() {
         <li className="p-3 hover:bg-gray-100">
           <Link className="text-black" href="/">
             Home
-          </Link>
-        </li>
-        <li className="p-3 hover:bg-gray-100">
-          <Link className="text-black" href="/explore">
-            Explore
           </Link>
         </li>
         <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">

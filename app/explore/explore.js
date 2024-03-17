@@ -90,8 +90,8 @@ export default function Explore() {
         </div>
       </section>
 
-      {/* section */}
-      <div className="bg-gray-100 p-4 mx-28 px-12 py-16 rounded shadow-md">
+      {/* section [find blood sample] */}
+      {/* <div className="bg-gray-100 p-4 mx-28 px-12 py-16 rounded shadow-md">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           Search Blood Requests
         </h2>
@@ -132,7 +132,7 @@ export default function Explore() {
             Find Requests
           </button>
         </form>
-      </div>
+      </div> */}
       {/* section */}
       {/* section */}
       <div className="p-4 rounded shadow-md mb-8">
