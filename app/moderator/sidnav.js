@@ -25,6 +25,11 @@ export default function SidNav() {
               All Requests
             </Link>
           </li>
+          <li className="hover:bg-gray-200 p-2 rounded-md">
+            <Link href="/moderator/donor-list" className="text-gray-600">
+              Donor List
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
