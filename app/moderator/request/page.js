@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import app, { db } from "../../firebase"; // Assuming your Firebase config file
 
 function BloodRequestPage() {
   const [formData, setFormData] = useState({
@@ -21,19 +23,48 @@ function BloodRequestPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const submitHandel = (e) => {
+  const submitHandel = async (e) => {
+    //
+    e.preventDefault(); // Prevent default form submission behavior
+
+    try {
+      const db = getFirestore(app); // Get Firestore instance
+      const requestsCollection = collection(db, "requests-list");
+
+      if (!formData.bloodgroup) {
+        alert("Please select a blood group.");
+        return;
+      }
+
+      // Add the request to Firestore
+      const newRequest = await addDoc(requestsCollection, {
+        ...formData, // Spread the entire formData object
+      });
+
+      console.log("Request successfully added:", newRequest.id);
+      alert("Your request has been submitted successfully!");
+
+      //clear the form after successful submission
+      setFormData({
+        bloodgroup: "",
+        unit: "",
+        urgency: "",
+        date: "",
+        time: "",
+        rname: "",
+        rnumber: "",
+        raddr: "",
+        hospitalname: "",
+        hospitaladdr: "",
+        district: "",
+      });
+    } catch (error) {
+      console.error("Error adding request:", error);
+      alert(
+        "An error occurred while submitting your request. Please try again."
+      );
+    }
     alert("Your request has been submitted successfully");
-    console.log(formData.bloodgroup);
-    console.log(formData.unite);
-    console.log(formData.urgency);
-    console.log(formData.date);
-    console.log(formData.time);
-    console.log(formData.rname);
-    console.log(formData.raddr);
-    console.log(formData.rnumber);
-    console.log(formData.hospitalname);
-    console.log(formData.hospitaladdr);
-    console.log(formData.district);
   };
 
   return (

@@ -1,0 +1,33 @@
+import Link from "next/link";
+
+import React from 'react'
+
+export default function DonorSideNav() {
+  return (
+    <div><div className="w-64 bg-gray-100 p-4">
+    <h1 className="text-xl font-bold mb-4">Board</h1>
+    <ul className="space-y-2">
+      <li className="text-gray-600 font-bold p-2 rounded-md">
+        Notifications
+      </li>
+      <li className="hover:bg-gray-200 p-2 rounded-md">
+        <Link href="/profile">
+          <p className="text-gray-600">Profile</p>
+        </Link>
+      </li>
+      <li className="hover:bg-gray-200 p-2 rounded-md">
+        <Link href="/requests">
+          <p className="text-gray-600">Donation Request</p>
+        </Link>
+      </li>
+      <li className="hover:bg-gray-200 p-2 rounded-md">
+        <Link href="/donation-stats">
+          <p className="text-gray-600">Donation Stats</p>
+        </Link>
+      </li>
+    </ul>
+  </div></div>
+  )
+}
+
+

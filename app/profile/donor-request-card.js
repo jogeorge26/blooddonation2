@@ -1,5 +1,5 @@
 export default function DonorRequestCard({ request }) {
-  // Destructure 
+  // Destructure
   const {
     rname,
     bloodgroup,
@@ -21,11 +21,17 @@ export default function DonorRequestCard({ request }) {
           </span>
         </div>
         <p className="text-gray-600">
-          {unite} units of blood needed at {hospitalname} ({district}) on {date}{" "}
-          at {time}
+          {unite} units of blood needed at {hospitalname} ({district})
         </p>
         {/* Optionally display date and time if needed */}
-        {/* <p className="text-gray-600">Date: {date}, Time: {time}</p> */}
+        <p className="text-gray-600">
+          Date: {date}, Time: {time}
+        </p>
+        <div className="flex justify-end">
+          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700">
+            Accept
+          </button>
+        </div>
       </div>
     </>
   );
