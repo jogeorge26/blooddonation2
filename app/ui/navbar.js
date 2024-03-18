@@ -26,24 +26,28 @@ export default function Navbar2() {
         {/* Replace with your image source path and desired dimensions */}
         <img
           className="h-6 w-6"
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn0.iconfinder.com%2Fdata%2Ficons%2Frounded-basics%2F24%2Frounded__menu-512.png&f=1&nofb=1&ipt=34efb1c86c2c85e13db419522b38228464004bbff6d7b148054e71b8e6eb7c07&ipo=images" // Replace with your image path
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn0.iconfinder.com%2Fdata%2Ficons%2Frounded-basics%2F24%2Frounded__menu-512.png&f=1&nofb=1&ipt=34efb1c86c2c85e13db419522b38228464004bbff6d7b148054e71b8e6eb7c07&ipo=images%22" // Replace with your path
           alt="Menu icon" // Provide a descriptive alt text for accessibility
         />
       </button>
 
       <ul
         id="mobile-menu"
-        className={`md:hidden p-4 bg-red absolute right-0 top-full w-full z-50 shadow-lg rounded-md transform origin-top-right transition duration-200 ease-in-out ${
-          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full" // Corrected transform property
+        className={`md:hidden fixed top-0 left-0 w-1/2 h-screen bg-red z-50 transition duration-200 ease-in-out transform ${
+          isMobileMenuOpen ? "-translate-x-0" : "-translate-x-full"
         }`}
         aria-labelledby="mobile-menu-label"
       >
-        <li className="mb-2 pt-2 pb-1 pr-4 pl-4 border-b border-gray-200 text-center hover:bg-gray-100 text-black">
-          <Link href="/">Home</Link>
-        </li>
-        <li className="text-center hover:bg-gray-100 text-black pt-2 pb-1 pr-4 pl-4 rounded-full bg-gray-200 hover:bg-red-500">
-          <Link href="/login">Login</Link>
-        </li>
+        <div className="p-4 bg-white rounded-md shadow-md">
+          {" "}
+          {/* Card container */}
+          <li className="text-center pt-2 pb-1 pr-4 pl-4 border-b border-gray-200 hover:bg-gray-100 text-black">
+            <Link href="/">Home</Link>
+          </li>
+          <li className="text-center pt-2 pb-1 pr-4 pl-4 rounded-full bg-gray-200 hover:bg-red-500">
+            <Link href="/login">Login</Link>
+          </li>
+        </div>
       </ul>
 
       <ul className="hidden md:flex flex-row items-center justify-between space-x-4 pr-2">
