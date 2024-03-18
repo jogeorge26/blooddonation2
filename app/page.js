@@ -19,7 +19,7 @@ export default function Home() {
               </p>
               <div className="flex justify-center md:justify-start mt-8">
                 <Link
-                  href="/register"
+                  href="/registration"
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow-md"
                 >
                   Register now
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-center bg-red-500 text-white p-5 pt-10 pb-10 ">
-        <span className="font-bold text-xl pr-4">123</span> Users
+        <span className="font-bold text-xl pr-4"></span>
       </div>
       <Explore />
       <Footer2 />
