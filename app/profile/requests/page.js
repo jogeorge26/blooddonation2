@@ -12,8 +12,9 @@ import {
 import DonorRequestCard from "../donor-request-card";
 import app, { db } from "../../firebase";
 import DonorSideNav from "../donorSideNav";
+import withAuthRender from "@/app/context/withAuth";
 
-export default function RequestLists() {
+const RequestLists = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -64,7 +65,9 @@ export default function RequestLists() {
       </div>
     </div>
   );
-}
+};
+
+export default withAuthRender(RequestLists);
 
 export function RequestListsU() {
   const [requests, setRequests] = useState([]);

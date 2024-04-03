@@ -2,11 +2,13 @@ import Image from "next/image";
 import Footer2 from "./ui/footer";
 import Link from "next/link";
 import Explore from "./explore/explore";
+import HomePage from "./home/home";
 
 export default function Home() {
   return (
     <main>
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
+      <HomePage />
+      {/* <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="w-full md:w-1/2 mb-4 md:mb-0">
@@ -35,7 +37,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-row items-center justify-center bg-red-500 text-white p-5 pt-10 pb-10 ">
         <span className="font-bold text-xl pr-4"></span>
       </div>

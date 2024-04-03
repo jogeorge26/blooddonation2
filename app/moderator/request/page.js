@@ -70,7 +70,9 @@ function BloodRequestPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-gray-100 rounded shadow-md p-4 flex flex-col gap-4">
-        <h2 className="text-xl font-bold text-gray-800">Request</h2>
+        <h2 className="text-xl font-bold text-gray-800">
+          Request Applying Form
+        </h2>
         <div className="grid grid-cols-1 gap-9">
           <div className="flex items-center">
             <label htmlFor="bloodType" className="mr-2 text-gray-700">
@@ -270,7 +272,7 @@ function BloodRequestPage() {
           type="submit"
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-          Apply Request
+          Post Request
         </button>
       </div>
     </div>

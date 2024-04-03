@@ -27,6 +27,9 @@ export default function Profile({ userId }) {
 
   // Removed unnecessary variable: const { userId } = useContext(AuthContext); // Not needed
 
+  //user name faatch
+  
+
   useEffect(() => {
     console.log("Profile page userId:", donorId, name, email); // Use user object properties
 
@@ -87,9 +90,6 @@ export default function Profile({ userId }) {
         <div className="w-64 bg-gray-100 p-4">
           <h1 className="text-xl font-bold mb-4">Board</h1>
           <ul className="space-y-2">
-            <li className="text-gray-600 font-bold p-2 rounded-md">
-              Notifications {userData.name}
-            </li>
             <li className="hover:bg-gray-200 p-2 rounded-md">
               <Link href="/profile">
                 <p className="text-gray-600">Profile</p>

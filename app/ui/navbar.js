@@ -1,14 +1,43 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useRouter, redirect } from "next/navigation";
+import { useState, useContext } from "react";
 import Link from "next/link";
+import { AuthProvider, AuthContext } from "../context/AuthContext";
+
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase"; // Import Firebase auth instance
 
 export default function Navbar2() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  //const { user, loading } = useContext(AuthContext); // Access user data from context
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { user, loading, setUserData } = useContext(AuthContext);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  async function handleLogout() {
+    try {
+      await signOut(auth);
+      console.log("User logged out successfully");
+
+      // Additional actions after logout (e.g., reset user state, redirect)
+      // Assuming setUserData updates user data in AuthContext
+      alert("Loggin Out");
+      setUserData(null);
+      redirect("/login");
+
+      // Redirect to login page
+    } catch (err) {
+      console.error("Error logging out:", err);
+      // Handle logout errors (e.g., display an error message)
+    }
+  }
 
   return (
     <nav className="bg-red p-4 flex flex-row justify-between items-center">
@@ -56,11 +85,34 @@ export default function Navbar2() {
             Home
           </Link>
         </li>
-        <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
+
+        {/* loading */}
+        {loading ? (
+          <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
+            <Link className="text-black" href="/login">
+              Login
+            </Link>
+          </li>
+        ) : user ? (
+          <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
+            <button className="text-black" onClick={handleLogout}>
+              {/* {user.name} */}Logout
+            </button>
+          </li>
+        ) : (
+          <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
+            <Link className="text-black" href="/login">
+              Login
+            </Link>
+          </li>
+        )}
+
+        {/* simple login */}
+        {/* <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
           <Link className="text-black" href="/login">
             Login
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

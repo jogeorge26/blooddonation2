@@ -267,7 +267,7 @@ const DonorRegistration = () => {
           />
 
           <label htmlFor="city" class="block">
-            city
+            City
           </label>
           <textarea
             id="city"

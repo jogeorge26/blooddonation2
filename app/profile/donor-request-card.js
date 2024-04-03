@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function DonorRequestCard({ request }) {
   // Destructure
   const {
@@ -28,9 +29,11 @@ export default function DonorRequestCard({ request }) {
           Date: {date}, Time: {time}
         </p>
         <div className="flex justify-end">
-          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700">
-            Accept
-          </button>
+          <Link href="/profile/questionare">
+            <div className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700">
+              Accept
+            </div>
+          </Link>
         </div>
       </div>
     </>

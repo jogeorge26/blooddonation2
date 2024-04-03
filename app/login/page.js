@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app, { db } from "../firebase"; // Import Firebase app
 import { AuthProvider, AuthContext } from "../context/AuthContext";
+import { getDoc, doc } from "firebase/firestore";
+// import {fetchDonorName} from "./fun";
 
 function LoginPage() {
   const router = useRouter();
@@ -12,6 +14,25 @@ function LoginPage() {
   const [error, setError] = useState(null);
   const auth = getAuth(app);
   const { userId, setUser, setUserData } = useContext(AuthContext);
+
+  async function fetchDonorName(userId) {
+    try {
+      const donorRef = doc(db, "donors", userId);
+      const donorSnap = await getDoc(donorRef);
+
+      if (donorSnap.exists()) {
+        const donorData = donorSnap.data();
+        const name = donorData.name;
+        return name;
+      } else {
+        console.warn("No donor document found for user:", userId);
+        return "";
+      }
+    } catch (err) {
+      console.error("Error fetching donor name:", err);
+      return "";
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,17 +47,18 @@ function LoginPage() {
       // Retrieve user data after successful login
       const userId = userCredential.user.uid;
       const userEmail = userCredential.user.email;
-      console.log("user id", userId);
+      const userName = await fetchDonorName(userId);
+      console.log("user id", userId, userName);
       //const userDoc = await (await db.collection("donors").doc(userId)).get(); // Fetch user document
       //console.log("USER DOC: ", userDoc.data());
       //const donorData = userDoc.data();
 
       if (userId != "") {
-        console.log("Setting data", userId);
+        //console.log("Setting data", userId);
         const userData = {
           donorId: userId.toString(),
           email: userEmail.toString(),
-          name: "name",
+          name: userName.toString(),
         };
 
         alert(`Redirecting to profile${userId}`);

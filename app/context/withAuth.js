@@ -1,23 +1,36 @@
-// import React, { useContext } from "react";
-// import { useRouter } from "next/router";
-// import { AuthContext } from "./AuthContext"; // Import AuthContext
+"use client";
+import React, { useContext } from "react";
+import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { AuthContext } from "./AuthContext"; // Import AuthContext
 
-// const withAuthRender = (Component) => {
-//   return (props) => {
-//     const { user, loading } = useContext(AuthContext);
-//     const router = useRouter();
+const withAuthRender = (Component) => {
+  const WrapperComponent = (props) => {
+    const { user, loading } = useContext(AuthContext);
+    //const router = useRouter();
 
-//     if (loading) {
-//       return <p>Loading...</p>; // Handle loading state (optional)
-//     }
+    if (loading) {
+      return (
+        <div>
+          <p>Loading...</p>
+          <Link href="/">return to home page</Link>
+        </div>
+      ); // Handle loading state (optional)
+    }
 
-//     if (!user) {
-//       router.push("/login"); // Redirect to login page if not authenticated
-//       return null;
-//     }
+    if (!user) {
+      redirect("/login");
+      //router.push("/login"); // Redirect to login page if not authenticated
+      return null;
+    }
 
-//     return <Component {...props} />; // Render the component if authenticated
-//   };
-// };
+    return <Component {...props} />; // Render the component if authenticated
+  };
+  WrapperComponent.displayName = `withAuthRender(${
+    Component.displayName || Component.name
+  })`;
+  return WrapperComponent;
+};
 
-// export default withAuthRender;
+export default withAuthRender;
