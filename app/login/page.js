@@ -13,7 +13,15 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const auth = getAuth(app);
-  const { userId, setUser, setUserData } = useContext(AuthContext);
+  const { user , userId, setUser, setUserData } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+      // User is already logged in, redirect to profile
+      router.push("/profile");
+    }
+  }, [user]);
+
 
   async function fetchDonorName(userId) {
     try {
@@ -48,10 +56,8 @@ function LoginPage() {
       const userId = userCredential.user.uid;
       const userEmail = userCredential.user.email;
       const userName = await fetchDonorName(userId);
-      console.log("user id", userId, userName);
-      //const userDoc = await (await db.collection("donors").doc(userId)).get(); // Fetch user document
-      //console.log("USER DOC: ", userDoc.data());
-      //const donorData = userDoc.data();
+      //console.log("user id", userId, userName);
+
 
       if (userId != "") {
         //console.log("Setting data", userId);
@@ -61,7 +67,13 @@ function LoginPage() {
           name: userName.toString(),
         };
 
-        alert(`Redirecting to profile${userId}`);
+        localStorage.setItem("userData", JSON.stringify({
+          donorId: userId,
+          email: userEmail,
+          name: userName,
+        }));
+
+        alert(`Redirecting to your profile${userName}`);
         setUserData(userData);
         router.push("/profile", { userId }); // Pass user name as query parameter
       } else {

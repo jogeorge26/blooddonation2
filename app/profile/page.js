@@ -16,23 +16,40 @@ import { db } from "../firebase";
 
 export default function Profile({ userId }) {
   const router = useRouter();
+  //const persistedUserData = localStorage.getItem("userData");
+  // if (persistedUserData) {
+  //   try {
+  //     const userData = JSON.parse(persistedUserData);
+  //     setUserData(userData); // Update the state with persisted data
+  //   } catch (error) {
+  //     console.error("Error parsing persisted user data:", error);
+  //   }
+  // }
+
+  
+  // Use this line
   const {
     user: { donorId, email, name },
     loading,
-  } = useContext(AuthContext); // Use this line
+  } = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Removed unnecessary variable: const { userId } = useContext(AuthContext); // Not needed
-
   //user name faatch
-  
 
   useEffect(() => {
-    console.log("Profile page userId:", donorId, name, email); // Use user object properties
-
+    //console.log("Profile page userId:", donorId, name, email); // Use user object properties
+    const persistedUserData = localStorage.getItem("userData");
+    if (persistedUserData) {
+      try {
+        const userData = JSON.parse(persistedUserData);
+        setUserData(userData); // Update the state with persisted data
+      } catch (error) {
+        console.error("Error parsing persisted user data:", error);
+      }
+    }
     const fetchData = async () => {
       if (donorId) {
         setIsLoading(true);
@@ -75,10 +92,6 @@ export default function Profile({ userId }) {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  // if (!donorId) {
-  //   router.push("/login");
-  // }
 
   if (!userData) {
     return <div>No donor data found for this user.</div>;

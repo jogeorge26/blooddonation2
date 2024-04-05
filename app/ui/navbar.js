@@ -23,16 +23,14 @@ export default function Navbar2() {
 
   async function handleLogout() {
     try {
-      await signOut(auth);
-      console.log("User logged out successfully");
-
-      // Additional actions after logout (e.g., reset user state, redirect)
-      // Assuming setUserData updates user data in AuthContext
-      alert("Loggin Out");
       setUserData(null);
-      redirect("/login");
+      localStorage.removeItem("userData");
+      await signOut(auth);
 
-      // Redirect to login page
+      console.log("User logged out successfully");
+      alert("Logging Out");
+
+      router.push("/");
     } catch (err) {
       console.error("Error logging out:", err);
       // Handle logout errors (e.g., display an error message)

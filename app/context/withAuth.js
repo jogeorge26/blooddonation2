@@ -21,7 +21,6 @@ const withAuthRender = (Component) => {
 
     if (!user) {
       redirect("/login");
-      //router.push("/login"); // Redirect to login page if not authenticated
       return null;
     }
 
