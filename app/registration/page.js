@@ -67,15 +67,12 @@ const DonorRegistration = () => {
       const donorSetRef = doc(db, "donors", uid);
 
       try {
-        // Wrap addDoc in a try-catch block
-        await setDoc(donorSetRef, formData); // Add donor data as a document with uid as docId
-        //await setDoc(donorRef, formData, { docId: uid }); // Add donor data as a document with uid as docId
+        await setDoc(donorSetRef, formData);
         console.log("Registration successful!");
         alert("Registration Successful! Please verify your email.");
-        router.push("/login"); // Redirect to login page
+        router.push("/login"); 
       } catch (error) {
         console.error("Error adding donor data:", error);
-        // Handle errors related to adding the document
       }
     } catch (err) {
       console.error("Registration error:", err);

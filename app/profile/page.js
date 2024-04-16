@@ -13,20 +13,11 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import SidNav from "../moderator/sidnav";
+import DonorSideNav from "./donorSideNav";
 
 export default function Profile({ userId }) {
   const router = useRouter();
-  //const persistedUserData = localStorage.getItem("userData");
-  // if (persistedUserData) {
-  //   try {
-  //     const userData = JSON.parse(persistedUserData);
-  //     setUserData(userData); // Update the state with persisted data
-  //   } catch (error) {
-  //     console.error("Error parsing persisted user data:", error);
-  //   }
-  // }
-
-  
   // Use this line
   const {
     user: { donorId, email, name },
@@ -98,84 +89,69 @@ export default function Profile({ userId }) {
   }
   return (
     <AuthProvider>
-      <div className="flex w-full h-screen">
-        {/* This is the sidebar section */}
-        <div className="w-64 bg-gray-100 p-4">
-          <h1 className="text-xl font-bold mb-4">Board</h1>
-          <ul className="space-y-2">
-            <li className="hover:bg-gray-200 p-2 rounded-md">
-              <Link href="/profile">
-                <p className="text-gray-600">Profile</p>
-              </Link>
-            </li>
-            <li className="hover:bg-gray-200 p-2 rounded-md">
-              <Link href="profile/requests">
-                <p className="text-gray-600">Donation Request</p>
-              </Link>
-            </li>
-            <li className="hover:bg-gray-200 p-2 rounded-md">
-              <Link href="#">
-                <p className="text-gray-600">Donation Stats</p>
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className="flex w-full h-screen ">
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* This is the sidebar section */}
+          <DonorSideNav />
+          {/* This is the main content section */}
+          <div className="flex-1 p-4">
+            <div className="flex justify-between mb-4">
+              <h2 className="text-4xl font-bold">Profile</h2>
+            </div>
+            {/* Profile  */}
 
-        {/* This is the main content section */}
-        <div className="flex-1 p-4">
-          <div className="flex justify-between mb-4">
-            <h2 className="text-4xl font-bold">Profile</h2>
-          </div>
-          {/* Profile  */}
-
-          <div className="flex flex-col space-y-4">
-            <h2 className="text-xl font-bold">Donor Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p className="text-gray-600">Name:</p>
-                <p className="font-bold">{userData.name}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Email:</p>
-                <p className="font-bold">{userData.email}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Phone:</p>
-                <p className="font-bold">{userData.phone || "Not provided"}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Date of Birth:</p>
-                <p className="font-bold">{userData.DOB || "Not provided"}</p>
-              </div>
-              <div>
-                <p className="text-gray-600">Blood Group:</p>
-                <p className="font-bold">
-                  {userData.bloodGroup || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-600">Last Donation Date:</p>
-                <p className="font-bold">
-                  {userData.lastDonationDate || "Not provided"}
-                </p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="text-gray-600">Address:</p>
-                <p className="font-bold">
-                  {userData.addr1} {userData.secAddr && `, ${userData.secAddr}`}
-                </p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="text-gray-600">City & District:</p>
-                <p className="font-bold">
-                  {userData.city}, {userData.district}
-                </p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="text-gray-600">Pincode:</p>
-                <p className="font-bold">
-                  {userData.pincode || "Not provided"}
-                </p>
+            <div className="flex flex-col space-y-4">
+              <h2 className="text-xl font-bold">Donor Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-gray-600">Name:</p>
+                  <p className="font-bold">{userData.name}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Email:</p>
+                  <p className="font-bold">{userData.email}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Phone:</p>
+                  <p className="font-bold">
+                    {userData.phone || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Date of Birth:</p>
+                  <p className="font-bold">{userData.DOB || "Not provided"}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Blood Group:</p>
+                  <p className="font-bold">
+                    {userData.bloodGroup || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Last Donation Date:</p>
+                  <p className="font-bold">
+                    {userData.lastDonationDate || "Not provided"}
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">Address:</p>
+                  <p className="font-bold">
+                    {userData.addr1}{" "}
+                    {userData.secAddr && `, ${userData.secAddr}`}
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">City & District:</p>
+                  <p className="font-bold">
+                    {userData.city}, {userData.district}
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">Pincode:</p>
+                  <p className="font-bold">
+                    {userData.pincode || "Not provided"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

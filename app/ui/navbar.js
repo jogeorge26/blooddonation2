@@ -25,6 +25,7 @@ export default function Navbar2() {
     try {
       setUserData(null);
       localStorage.removeItem("userData");
+      localStorage.removeItem("userSelectedRequest");
       await signOut(auth);
 
       console.log("User logged out successfully");
@@ -92,11 +93,18 @@ export default function Navbar2() {
             </Link>
           </li>
         ) : user ? (
-          <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
-            <button className="text-black" onClick={handleLogout}>
-              {/* {user.name} */}Logout
-            </button>
-          </li>
+          <div className="hidden md:flex flex-row rounded-full bg-gray-200">
+            <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-gray-400">
+              <Link className="text-black" href="/profile">
+                Profile
+              </Link>
+            </li>
+            <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
+              <button className="text-black" onClick={handleLogout}>
+                {/* {user.name} */}Logout
+              </button>
+            </li>
+          </div>
         ) : (
           <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
             <Link className="text-black" href="/login">
@@ -104,13 +112,6 @@ export default function Navbar2() {
             </Link>
           </li>
         )}
-
-        {/* simple login */}
-        {/* <li className="p-3 pl-3 pr-3 rounded-full bg-gray-200 hover:bg-red-500">
-          <Link className="text-black" href="/login">
-            Login
-          </Link>
-        </li> */}
       </ul>
     </nav>
   );

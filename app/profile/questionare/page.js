@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 //import app, { db } from "../firebase";
 import withAuthRender from "@/app/context/withAuth";
+import { useRouter } from "next/navigation";
 
 const Questionnaire = () => {
+  const router = useRouter();
   const [previouslyDonated, setPreviouslyDonated] = useState(false);
   const [healthy, sethealthy] = useState(false);
   const [Lastdonation, setLastdonation] = useState(false);
@@ -83,6 +85,8 @@ const Questionnaire = () => {
       console.error("Error adding response: ", error);
       // Optionally, show an error message to the user
     }
+    router.push("stats");
+    //localStorage.removeItem("userData");
   };
 
   return (

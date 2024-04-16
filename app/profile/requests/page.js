@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import DonorRequestCard from "../donor-request-card";
+import DonorRequestCard from "./donor-request-card";
 import app, { db } from "../../firebase";
 import DonorSideNav from "../donorSideNav";
 import withAuthRender from "@/app/context/withAuth";

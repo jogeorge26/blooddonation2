@@ -14,12 +14,12 @@ export default function DonorSideNav() {
             </Link>
           </li>
           <li className="hover:bg-gray-200 p-2 rounded-md">
-            <Link href="/requests">
+            <Link href="/profile/requests">
               <p className="text-gray-600">Donation Request</p>
             </Link>
           </li>
           <li className="hover:bg-gray-200 p-2 rounded-md">
-            <Link href="/donation-stats">
+            <Link href="/profile/stats">
               <p className="text-gray-600">Donation Stats</p>
             </Link>
           </li>
