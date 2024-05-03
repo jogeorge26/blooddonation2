@@ -29,6 +29,7 @@ const DonorRegistration = () => {
     district: "",
     pincode: "",
     password: "",
+    reqId: "",
   });
 
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -70,7 +71,7 @@ const DonorRegistration = () => {
         await setDoc(donorSetRef, formData);
         console.log("Registration successful!");
         alert("Registration Successful! Please verify your email.");
-        router.push("/login"); 
+        router.push("/login");
       } catch (error) {
         console.error("Error adding donor data:", error);
       }

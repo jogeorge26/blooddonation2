@@ -56,35 +56,35 @@ const Questionnaire = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await firestore
-        .collection("questionnaireResponses")
-        .add({
-          previouslyDonated,
-          medicalConditions,
-          medications,
-          healthy,
-          Lastdonation,
-          Last7days,
-          surgeryHistory,
-        });
+    // try {
+    //   const response = await firestore
+    //     .collection("questionnaireResponses")
+    //     .add({
+    //       previouslyDonated,
+    //       medicalConditions,
+    //       medications,
+    //       healthy,
+    //       Lastdonation,
+    //       Last7days,
+    //       surgeryHistory,
+    //     });
 
-      console.log("Response added with ID: ", response.id);
+    //   console.log("Response added with ID: ", response.id);
 
-      // Reset form fields after successful submission
-      setPreviouslyDonated(false);
-      sethealthy(false);
-      setLastdonation(false);
-      setLast7days(false);
-      setMedicalConditions([]);
-      setMedications([]);
-      setSurgeryHistory("");
+    //   // Reset form fields after successful submission
+    //   setPreviouslyDonated(false);
+    //   sethealthy(false);
+    //   setLastdonation(false);
+    //   setLast7days(false);
+    //   setMedicalConditions([]);
+    //   setMedications([]);
+    //   setSurgeryHistory("");
 
-      // Optionally, show a success message to the user
-    } catch (error) {
-      console.error("Error adding response: ", error);
-      // Optionally, show an error message to the user
-    }
+    //   // Optionally, show a success message to the user
+    // } catch (error) {
+    //   console.error("Error adding response: ", error);
+    //   // Optionally, show an error message to the user
+    // }
     router.push("stats");
     //localStorage.removeItem("userData");
   };

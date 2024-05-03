@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RequestIdContext } from "../../context/RequestContext";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
+
 ///profile/questionare
 export default function DonorRequestCard({ request }) {
-  //const { setRequestId } = useContext(RequestIdContext);
+  const [userData, setUserData] = useState(null);
   const router = useRouter();
-  // Destructure
   const {
     rname,
     bloodgroup,
@@ -18,8 +20,33 @@ export default function DonorRequestCard({ request }) {
     district,
   } = request;
 
-  const handleSub = () => {
-    router.push("/profile/questionare");
+  const updateDonorReqId = async () => {
+    const persistedUserData = localStorage.getItem("userData");
+    const userDataLocal = JSON.parse(persistedUserData);
+    // setUserData(userData);
+    console.log("uid in updating reqid " + userDataLocal.donorId);
+    try {
+      const uid = userDataLocal.donorId;
+      const donorRef = doc(db, "donors", uid);
+      console.log("uid in updating reqid " + uid);
+      console.log(donorRef);
+      const donorDoc = await getDoc(donorRef);
+
+      if (donorDoc.exists) {
+        const donorData = donorDoc.data();
+        console.log(donorData);
+        await updateDoc(donorRef, { reqId: request.id });
+        console.log("Donor reqId updated successfully!");
+      } else {
+        console.warn("Donor document not found in Firestore.");
+      }
+    } catch (error) {
+      console.error("Error updating donor reqId:", error);
+    }
+  };
+
+  const handleSub = async () => {
+    // router.push("/profile/questionare");
     console.log("Data r.id" + request.id);
     localStorage.removeItem("userSelectedRequest");
     localStorage.setItem(
@@ -28,6 +55,11 @@ export default function DonorRequestCard({ request }) {
         requestId: request.id,
       })
     );
+    // Firebase req update
+    updateDonorReqId();
+
+    //end
+    router.push("/profile/questionare");
   };
   return (
     <>
