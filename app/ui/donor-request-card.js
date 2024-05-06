@@ -1,5 +1,5 @@
 export default function DonorRequestCard({ request }) {
-  // Destructure 
+  // Destructure
   const {
     rname,
     bloodgroup,
@@ -9,6 +9,7 @@ export default function DonorRequestCard({ request }) {
     time,
     hospitalname,
     district,
+    status,
   } = request;
 
   return (
@@ -25,7 +26,9 @@ export default function DonorRequestCard({ request }) {
           at {time}
         </p>
         {/* Optionally display date and time if needed */}
-        {/* <p className="text-gray-600">Date: {date}, Time: {time}</p> */}
+        <p className="text-gray-600">
+          status: {status ? status : "NOT UPDATED"},
+        </p>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app, { db } from "../firebase"; // Import Firebase app
@@ -13,7 +14,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const auth = getAuth(app);
-  const { user , userId, setUser, setUserData } = useContext(AuthContext);
+  const { user, userId, setUser, setUserData } = useContext(AuthContext);
 
   useEffect(() => {
     if (user) {
@@ -21,7 +22,6 @@ function LoginPage() {
       router.push("/profile");
     }
   }, [user]);
-
 
   async function fetchDonorName(userId) {
     try {
@@ -58,7 +58,6 @@ function LoginPage() {
       const userName = await fetchDonorName(userId);
       //console.log("user id", userId, userName);
 
-
       if (userId != "") {
         //console.log("Setting data", userId);
         const userData = {
@@ -67,11 +66,14 @@ function LoginPage() {
           name: userName.toString(),
         };
 
-        localStorage.setItem("userData", JSON.stringify({
-          donorId: userId,
-          email: userEmail,
-          name: userName,
-        }));
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            donorId: userId,
+            email: userEmail,
+            name: userName,
+          })
+        );
 
         alert(`Redirecting to your profile${userName}`);
         setUserData(userData);
@@ -131,6 +133,9 @@ function LoginPage() {
         {error && (
           <p className="text-red-500">Error(auth / invalid - credential)</p>
         )}
+        <div>
+          <Link href="/moderator/login">Moderator - Login</Link>
+        </div>
       </div>
     </AuthProvider>
   );

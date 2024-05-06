@@ -17,6 +17,8 @@ function BloodRequestPage() {
     hospitalname: "",
     hospitaladdr: "",
     district: "",
+    status: "pending",
+    donorlist:[],
   });
 
   const handleChange = (e) => {
@@ -24,7 +26,6 @@ function BloodRequestPage() {
   };
 
   const submitHandel = async (e) => {
-    //
     e.preventDefault(); // Prevent default form submission behavior
 
     try {
@@ -57,6 +58,7 @@ function BloodRequestPage() {
         hospitalname: "",
         hospitaladdr: "",
         district: "",
+        status: "",
       });
     } catch (error) {
       console.error("Error adding request:", error);

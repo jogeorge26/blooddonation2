@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-//import app, { db } from "../firebase";
+import app, { db } from "../../firebase";
 import withAuthRender from "@/app/context/withAuth";
 import { useRouter } from "next/navigation";
+import { getDoc, updateDoc, doc, FieldValue } from "firebase/firestore";
 
 const Questionnaire = () => {
   const router = useRouter();
@@ -13,6 +14,88 @@ const Questionnaire = () => {
   const [medicalConditions, setMedicalConditions] = useState([]);
   const [medications, setMedications] = useState([]);
   const [surgeryHistory, setSurgeryHistory] = useState("");
+
+  //Update the Request doc
+  const updateRequestDoc = async (requestId, donorId) => {
+    const requestRef = doc(db, "requests-list", requestId);
+
+    try {
+      // Check if the donor-list field exists
+      const requestDoc = await getDoc(requestRef);
+      const existingDonorList = requestDoc.data().donorlist || [];
+
+      // Add the donor ID to the existing list
+      // const updatedDonorList = [...existingDonorList, donorId];
+      existingDonorList.push(donorId);
+
+      // Decrement the unit field (assuming it's stored as a string in Firestore)
+      const currentUnit = parseInt(requestDoc.data().unite, 10) || 0; // Handle potential non-numeric values
+      const updatedUnit = Math.max(0, currentUnit - 1).toString(); // Ensure unit is not negative
+
+      // Update the document with the updated donor list and unit
+      await updateDoc(requestRef, {
+        // donorlist: FieldValue.arrayUnion(...updatedDonorList),
+        donorlist: existingDonorList,
+        unite: updatedUnit,
+      });
+
+      console.log("Donor ID added to the list successfully and unit updated.");
+    } catch (error) {
+      console.log("Error adding donor ID:", error);
+      alert("An error occurred while adding the donor ID. Please try again.");
+    }
+  };
+
+  //User Data
+  const updateDonorReqId = async () => {
+    // requestId
+    const reqIDlocal = localStorage.getItem("userSelectedRequest");
+    const requestLocal = JSON.parse(reqIDlocal);
+    const requestUid = requestLocal.requestId;
+    //User
+    const persistedUserData = localStorage.getItem("userData");
+    const userDataLocal = JSON.parse(persistedUserData);
+
+    // console.log("uid in updating reqid " + userDataLocal.donorId);
+    try {
+      const uid = userDataLocal.donorId;
+      const donorRef = doc(db, "donors", uid);
+      // console.log("uid in updating reqid " + uid);
+      // console.log(donorRef);
+      const donorDoc = await getDoc(donorRef);
+
+      if (donorDoc.exists) {
+        const donorData = donorDoc.data();
+        // console.log(donorData);
+        await updateDoc(donorRef, {
+          reqId: requestUid,
+        });
+        //lastDonationDate: todaysDate,
+        await updateDoc(donorRef, {
+          lastDonationDate: getTodayDate(),
+        });
+        //Update requent with array and unit
+
+        console.log("Donor reqId updated successfully!");
+      } else {
+        console.warn("Donor document not found in Firestore.");
+      }
+    } catch (error) {
+      console.error("Error updating donor reqId:", error);
+    }
+    console.log("Updating ReqDoc");
+    updateRequestDoc(requestUid, userDataLocal.donorId);
+  };
+  // Date update
+
+  function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
 
   const handlePreviouslyDonated = (event) => {
     setPreviouslyDonated(event.target.value === "Yes");
@@ -55,36 +138,8 @@ const Questionnaire = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // try {
-    //   const response = await firestore
-    //     .collection("questionnaireResponses")
-    //     .add({
-    //       previouslyDonated,
-    //       medicalConditions,
-    //       medications,
-    //       healthy,
-    //       Lastdonation,
-    //       Last7days,
-    //       surgeryHistory,
-    //     });
-
-    //   console.log("Response added with ID: ", response.id);
-
-    //   // Reset form fields after successful submission
-    //   setPreviouslyDonated(false);
-    //   sethealthy(false);
-    //   setLastdonation(false);
-    //   setLast7days(false);
-    //   setMedicalConditions([]);
-    //   setMedications([]);
-    //   setSurgeryHistory("");
-
-    //   // Optionally, show a success message to the user
-    // } catch (error) {
-    //   console.error("Error adding response: ", error);
-    //   // Optionally, show an error message to the user
-    // }
+    updateDonorReqId();
+    alert("Request Accepted");
     router.push("stats");
     //localStorage.removeItem("userData");
   };

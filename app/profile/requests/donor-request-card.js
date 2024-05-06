@@ -9,7 +9,7 @@ import { db } from "../../firebase";
 export default function DonorRequestCard({ request }) {
   const [userData, setUserData] = useState(null);
   const router = useRouter();
-  const {
+  const { 
     rname,
     bloodgroup,
     unite,
@@ -20,30 +20,30 @@ export default function DonorRequestCard({ request }) {
     district,
   } = request;
 
-  const updateDonorReqId = async () => {
-    const persistedUserData = localStorage.getItem("userData");
-    const userDataLocal = JSON.parse(persistedUserData);
-    // setUserData(userData);
-    console.log("uid in updating reqid " + userDataLocal.donorId);
-    try {
-      const uid = userDataLocal.donorId;
-      const donorRef = doc(db, "donors", uid);
-      console.log("uid in updating reqid " + uid);
-      console.log(donorRef);
-      const donorDoc = await getDoc(donorRef);
+  // const updateDonorReqId = async () => {
+  //   const persistedUserData = localStorage.getItem("userData");
+  //   const userDataLocal = JSON.parse(persistedUserData);
+  //   // setUserData(userData);
+  //   console.log("uid in updating reqid " + userDataLocal.donorId);
+  //   try {
+  //     const uid = userDataLocal.donorId;
+  //     const donorRef = doc(db, "donors", uid);
+  //     console.log("uid in updating reqid " + uid);
+  //     console.log(donorRef);
+  //     const donorDoc = await getDoc(donorRef);
 
-      if (donorDoc.exists) {
-        const donorData = donorDoc.data();
-        console.log(donorData);
-        await updateDoc(donorRef, { reqId: request.id });
-        console.log("Donor reqId updated successfully!");
-      } else {
-        console.warn("Donor document not found in Firestore.");
-      }
-    } catch (error) {
-      console.error("Error updating donor reqId:", error);
-    }
-  };
+  //     if (donorDoc.exists) {
+  //       const donorData = donorDoc.data();
+  //       console.log(donorData);
+  //       await updateDoc(donorRef, { reqId: request.id });
+  //       console.log("Donor reqId updated successfully!");
+  //     } else {
+  //       console.warn("Donor document not found in Firestore.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating donor reqId:", error);
+  //   }
+  // };
 
   const handleSub = async () => {
     // router.push("/profile/questionare");
@@ -56,7 +56,7 @@ export default function DonorRequestCard({ request }) {
       })
     );
     // Firebase req update
-    updateDonorReqId();
+    // updateDonorReqId();
 
     //end
     router.push("/profile/questionare");
