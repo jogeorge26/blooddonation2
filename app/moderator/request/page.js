@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import app, { db } from "../../firebase"; // Assuming your Firebase config file
+import notifyDonors2 from "./../../fun/notify2";
+// import { sendNotify } from "../../lib/api";
 
 function BloodRequestPage() {
   const [formData, setFormData] = useState({
@@ -18,7 +20,7 @@ function BloodRequestPage() {
     hospitaladdr: "",
     district: "",
     status: "pending",
-    donorlist:[],
+    donorlist: [],
   });
 
   const handleChange = (e) => {
@@ -41,6 +43,10 @@ function BloodRequestPage() {
       const newRequest = await addDoc(requestsCollection, {
         ...formData, // Spread the entire formData object
       });
+
+      //Send Notifiation
+      notifyDonors2(formData);
+
 
       console.log("Request successfully added:", newRequest.id);
       alert("Your request has been submitted successfully!");
@@ -66,6 +72,8 @@ function BloodRequestPage() {
         "An error occurred while submitting your request. Please try again."
       );
     }
+    // const val = { a: "Data", b: "Data2" };
+    // await sendNotify(val);
     alert("Your request has been submitted successfully");
   };
 

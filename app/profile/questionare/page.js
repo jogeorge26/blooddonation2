@@ -15,6 +15,45 @@ const Questionnaire = () => {
   const [medications, setMedications] = useState([]);
   const [surgeryHistory, setSurgeryHistory] = useState("");
 
+  //eligibleCondition
+  function isEligibleToDonate(formData) {
+    const {
+      previouslyDonated,
+      healthy,
+      Lastdonation,
+      Last7days,
+      medicalConditions,
+    } = formData;
+
+    if (!healthy) {
+      return false;
+    }
+
+    if (Lastdonation) {
+      return false;
+    }
+
+    if (Last7days) {
+      return false;
+    }
+    // const ineligibleConditions = ["hiv", "hepatitis"];
+    // const hasIneligibleCondition = medicalConditions.some((condition) =>
+    //   ineligibleConditions.includes(condition)
+    // );
+
+    // if (hasIneligibleCondition) {
+    //   return false; // Has an ineligible medical condition, not eligible.
+    // }
+
+    // if (previouslyDonated) {
+    //   console.warn("Previously donated eligibility needs implementation.");
+    // }
+
+    return true;
+  }
+
+  //END
+
   //Update the Request doc
   const updateRequestDoc = async (requestId, donorId) => {
     const requestRef = doc(db, "requests-list", requestId);
@@ -84,7 +123,7 @@ const Questionnaire = () => {
       console.error("Error updating donor reqId:", error);
     }
     console.log("Updating ReqDoc");
-    updateRequestDoc(requestUid, userDataLocal.donorId);
+    updateRequestDoc(requestUid);
   };
   // Date update
 
@@ -137,6 +176,17 @@ const Questionnaire = () => {
   };
 
   const handleSubmit = async (event) => {
+    // if (isEligibleToDonate(formData)) {
+    //   console.log("Can donate");
+    //   event.preventDefault();
+    //   updateDonorReqId();
+    //   alert("Request Accepted");
+    //   router.push("stats");
+    // } else {
+    //   alert("Not Eligible ");
+    //   console.log("Not Eligible ");
+    //   router.push("/requests");
+    // }
     event.preventDefault();
     updateDonorReqId();
     alert("Request Accepted");
