@@ -26,6 +26,7 @@ const Questionnaire = () => {
     } = formData;
 
     if (!healthy) {
+      console.log(healthy);
       return false;
     }
 
@@ -170,6 +171,11 @@ const Questionnaire = () => {
   };
 
   const handleSubmit = async (event) => {
+    if (isEligibleToDonate(formData)) {
+      console.log("Can donate");
+    } else {
+      alert("You are not eligible to");
+    }
     // if (isEligibleToDonate(formData)) {
     //   console.log("Can donate");
     //   event.preventDefault();
@@ -181,9 +187,11 @@ const Questionnaire = () => {
     //   console.log("Not Eligible ");
     //   router.push("/requests");
     // }
+
     event.preventDefault();
     updateDonorReqId();
     alert("Request Accepted");
+
     router.push("stats");
     //localStorage.removeItem("userData");
   };
