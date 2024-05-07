@@ -62,16 +62,10 @@ const Questionnaire = () => {
       // Check if the donor-list field exists
       const requestDoc = await getDoc(requestRef);
       const existingDonorList = requestDoc.data().donorlist || [];
-
-      // Add the donor ID to the existing list
-      // const updatedDonorList = [...existingDonorList, donorId];
       existingDonorList.push(donorId);
+      const currentUnit = parseInt(requestDoc.data().unite, 10) || 0;
+      const updatedUnit = Math.max(0, currentUnit - 1).toString();
 
-      // Decrement the unit field (assuming it's stored as a string in Firestore)
-      const currentUnit = parseInt(requestDoc.data().unite, 10) || 0; // Handle potential non-numeric values
-      const updatedUnit = Math.max(0, currentUnit - 1).toString(); // Ensure unit is not negative
-
-      // Update the document with the updated donor list and unit
       await updateDoc(requestRef, {
         // donorlist: FieldValue.arrayUnion(...updatedDonorList),
         donorlist: existingDonorList,
@@ -123,7 +117,7 @@ const Questionnaire = () => {
       console.error("Error updating donor reqId:", error);
     }
     console.log("Updating ReqDoc");
-    updateRequestDoc(requestUid);
+    updateRequestDoc(requestUid, userDataLocal.donorId);
   };
   // Date update
 
