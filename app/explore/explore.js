@@ -6,7 +6,7 @@ export default function Explore() {
       <section className="bg-red-100 py-8">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-red-500 text-center mb-8">
-            About Blood Donation
+            About Rudrasena
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -43,52 +43,7 @@ export default function Explore() {
         </div>
       </section>
       {/* Section */}
-      <section className="bg-white py-8">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
-            How to Donate Blood
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <ol className="list-decimal pl-4 text-gray-700">
-                <li>
-                  Check your eligibility: Visit the official website of your
-                  local blood bank or [link to national blood donation
-                  eligibility information]. They will have information on age,
-                  weight, health, and other eligibility criteria.
-                </li>
-                <li>
-                  Find a blood drive near you: Use the search tool on your local
-                  blood bank website or search online for nearby blood drives.
-                  Many blood banks also offer mobile apps for easy search and
-                  appointment scheduling.
-                </li>
-                <li>
-                  Schedule an appointment (optional): While walk-ins are often
-                  welcome, scheduling an appointment can help ensure a smoother
-                  donation experience and reduce waiting times.
-                </li>
-                <li>
-                  Eat a healthy meal and drink plenty of water before your
-                  donation. This will help you feel better during and after the
-                  process.
-                </li>
-                <li>
-                  Bring a valid ID with you to the blood drive. This is required
-                  to verify your identity and eligibility.
-                </li>
-              </ol>
-            </div>
-            <div>
-              <img
-                src="https://www.kauveryhospital.com/images/newsletters/2022/december/blood-donation.jpg"
-                alt="Blood donation steps illustration"
-                className="w-full rounded shadow-md"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* section [find blood sample] */}
       {/* <div className="bg-gray-100 p-4 mx-28 px-12 py-16 rounded shadow-md">

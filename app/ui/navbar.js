@@ -4,6 +4,7 @@ import { useRouter, redirect } from "next/navigation";
 import { useState, useContext } from "react";
 import Link from "next/link";
 import { AuthProvider, AuthContext } from "../context/AuthContext";
+import '../styles/navbar.css';
 
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase"; // Import Firebase auth instance
@@ -40,7 +41,8 @@ export default function Navbar2() {
 
   return (
     <nav className="bg-red p-4 flex flex-row justify-between items-center">
-      <h1 className="text-black pl-2 font-bold text-2xl">BLOOD MANAGEMENT</h1>
+      <img className="logo" src="dummylogo.png" alt="" />
+      <h1 className="text-black pl-2 font-bold text-2xl text1">BLOOD MANAGEMENT</h1>
 
       <button
         className={`md:hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-red-500 inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 ${
