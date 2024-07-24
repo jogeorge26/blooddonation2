@@ -1,9 +1,10 @@
 import React from "react";
+import '../styles/navbar.css';
 
 export default function Footer2() {
   return (
     <div>
-      <footer className="bg-gray-700 text-white py-8 px-4">
+      <footer className="bg-red-500 text-white py-8 px-4" foot__color>
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col space-y-4">
             {/* <img src="your-logo.png" alt="Blood Donation Website Logo" className="w-20 h-20 mb-2"> */}
