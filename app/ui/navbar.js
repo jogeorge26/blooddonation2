@@ -44,7 +44,7 @@ export default function Navbar2() {
       <nav className=" bg-red p-4 flex flex-row justify-between items-center">
         <div className="logo-box">
         <img className="logo" src="nss_logo.png" alt="" />
-        <p className="unit-num">NSS UNIT NO : 515 </p>
+        <p className="unit-num">UNIT NO : 515 </p>
         </div>
       
       <h1 className="text-black pl-2 font-bold text-2xl text1">BLOOD MANAGEMENT</h1>
