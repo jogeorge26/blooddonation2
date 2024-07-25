@@ -15,6 +15,7 @@ import {
 import { db } from "../firebase";
 import SidNav from "../moderator/sidnav";
 import DonorSideNav from "./donorSideNav";
+import Calendar from './calender'
 
 export default function Profile({ userId }) {
   const router = useRouter();
@@ -89,12 +90,14 @@ export default function Profile({ userId }) {
   }
   return (
     <AuthProvider>
-      <div className="flex w-full h-screen ">
-        <div className="grid sm:grid-cols-2 gap-4">
+      
+      <div className="flex w-full h-screen " >
+        <div className="grid sm:grid-cols-2 gap-4  bg-red-50" >
           {/* This is the sidebar section */}
           <DonorSideNav />
           {/* This is the main content section */}
-          <div className="flex-1 p-4">
+         <div className="profile-box">
+         <div className="flex-1 rounded-lg p-4 mt-16 " style={{ height: "75%", background:"white"}}>
             <div className="flex justify-between mb-4">
               <h2 className="text-4xl font-bold">Profile</h2>
             </div>
@@ -153,9 +156,14 @@ export default function Profile({ userId }) {
                   </p>
                 </div>
               </div>
+           
             </div>
+            
           </div>
+         </div>
+         
         </div>
+        <Calendar/>
       </div>
     </AuthProvider>
   );

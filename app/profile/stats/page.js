@@ -83,7 +83,7 @@ const RequestLists = () => {
       <div className="grid sm:grid-cols-2 gap-4">
         <DonorSideNav />
         {/* <h1>{requestData.bloodgroup}</h1> */}
-        <div className="bg-white shadow overflow-hidden rounded-lg mb-4">
+        <div className="bg-white shadow overflow-hidden rounded-lg mb-4 donate-details__box">
           <div className="px-4 py-5 sm:p-6">
             <h5 className="text-xl font-bold leading-tight text-gray-900">
               Blood Donation Request Details

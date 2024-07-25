@@ -3,10 +3,10 @@ import React from "react";
 export default function Explore() {
   return (
     <div>
-      <section className="bg-red-100 py-8">
+      <section className="bg-white-100 py-8 about-section">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-red-500 text-center mb-8">
-            About Rudrasena
+          <h2 className="text-3xl font-bold text-red-500 text-center mb-8 about-title">
+            About Rudhirasena
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -90,7 +90,7 @@ export default function Explore() {
       </div> */}
       {/* section */}
       {/* section */}
-      <div className="p-4 rounded shadow-md mb-8">
+      {/* <div className="p-4 rounded shadow-md mb-8">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
           Blood Donation Information
         </h2>
@@ -106,7 +106,7 @@ export default function Explore() {
         <a href="/learn-more" className="text-blue-500 hover:underline">
           Learn More About Blood Donation
         </a>
-      </div>
+      </div> */}
       {/* section */}
       <section className="bg-red-500 py-8 text-center">
         <div className="container mx-auto px-4">

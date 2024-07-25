@@ -38,7 +38,7 @@ export default function Home() {
           </div>
         </div>
       </div> */}
-      <div className="flex flex-row items-center justify-center bg-red-500 text-white p-5 pt-10 pb-10 ">
+      <div className="flex flex-row items-center justify-center  text-white p-5 pt-10 pb-10 ">
         <span className="font-bold text-xl pr-4"></span>
       </div>
       <Explore />

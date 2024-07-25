@@ -10,7 +10,7 @@ export default function HomePage() {
     <div>
       <section
         className="bg-cover bg-center h-screen"
-        style={{ backgroundImage: `url(${bgImageUrl})` }}
+        style={{ backgroundImage: `url(${bgImageUrl})`}}
       >
         <div className="container mx-auto px-4">
           <div className="container mx-auto px-4 text-white text-center malgun gothic">

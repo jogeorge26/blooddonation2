@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "calender-nifty": "^1.1.6",
     "emailjs": "^4.0.3",
     "firebase": "^10.11.1",
     "next": "^14.1.3",
