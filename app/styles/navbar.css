@@ -1,3 +1,5 @@
+        
+
 nav {
     background-color: white;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
@@ -27,7 +29,7 @@ nav {
 
 .reg-box {
     backdrop-filter: blur(2px);
-    width: 1530px;
+    width: 1525px;
     margin-left: -150px;
     height: 730px;
     margin-top: -128px;
@@ -40,19 +42,25 @@ nav {
 }
 
 .donate-details__box {
-    margin-top: 20%;
-   
+    margin-top: 64px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.statbox {
+  width: 1200px;
 }
 
 .profile-box {
-/* margin-left: 100px; */
+   margin-left: 200px;
 }
 /* components/Calendar.module.css */
 .calendar { 
     /* padding-left: 10px; */
     margin-top: 65px;
+    
     height: 347px;
-    width: 500px;
+    width:  477px;
     max-width: 400px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -60,7 +68,9 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+
   .calender-box {
+    margin-right: 1000px;
     padding-left: 30px;
     padding-right: 20px;
   }
@@ -100,3 +110,24 @@ nav {
     cursor: pointer;
   }
   
+.calender-box {
+  margin-right: -500px;
+  width:  477px;
+}
+.box2 {
+   width: 1040px;
+   
+}
+
+.box3 {
+  height: 730px;
+}
+
+.unit-num {
+  font-size: xx-small;
+  margin: 5px 0 0 -12px;
+}
+
+.logo-box {
+  margin-top: -5px;
+}

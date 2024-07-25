@@ -108,8 +108,8 @@ export default function Explore() {
         </a>
       </div> */}
       {/* section */}
-      <section className="bg-red-500 py-8 text-center">
-        <div className="container mx-auto px-4">
+      <section className="bg-red-500 mt-6 py-8 text-center">
+        <div className="container mx-auto mt-8 px-4">
           <h2 className="text-3xl font-bold text-white mb-4">
             Be a Hero. Donate Blood Today.
           </h2>

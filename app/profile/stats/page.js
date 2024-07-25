@@ -79,13 +79,15 @@ const RequestLists = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
-      <div className="grid sm:grid-cols-2 gap-4">
+    <div className="flex w-full h-screen statbox">
+      <div className="grid sm:grid-cols-2 bg-red-50 gap-4  ">
         <DonorSideNav />
         {/* <h1>{requestData.bloodgroup}</h1> */}
-        <div className="bg-white shadow overflow-hidden rounded-lg mb-4 donate-details__box">
-          <div className="px-4 py-5 sm:p-6">
+       <div className="main-stat">
+       <div className="bg-white shadow overflow-hidden rounded-lg  mb-4 p-4  donate-details__box">
+          <div className="px-4 py-5 sm:p-6 ">
             <h5 className="text-xl font-bold leading-tight text-gray-900">
+            {/* flex-1 rounded-lg p-4 mt-16 */}
               Blood Donation Request Details
             </h5>
             <ul className="mt-6 list-disc list-inside space-y-2">
@@ -134,7 +136,10 @@ const RequestLists = () => {
             </ul>
           </div>
         </div>
+       </div>
+       
       </div>
+      <div className="calender-box bg-red-50"></div>
     </div>
   );
 };

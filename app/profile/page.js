@@ -92,14 +92,15 @@ export default function Profile({ userId }) {
     <AuthProvider>
       
       <div className="flex w-full h-screen " >
-        <div className="grid sm:grid-cols-2 gap-4  bg-red-50" >
+        <div className="box2">
+        <div className="grid sm:grid-cols-2 gap-4 bg-red-50 box3 " >
           {/* This is the sidebar section */}
           <DonorSideNav />
           {/* This is the main content section */}
-         <div className="profile-box">
-         <div className="flex-1 rounded-lg p-4 mt-16 " style={{ height: "75%", background:"white"}}>
-            <div className="flex justify-between mb-4">
-              <h2 className="text-4xl font-bold">Profile</h2>
+         <div  style={{}}>
+         <div className="flex-1 rounded-lg p-4 mt-16  " style={{ height: "75%", background:"white"}}>
+            <div className="flex justify-between mb-4 ">
+              <h2 className="text-4xl font-bold ">Profile</h2>
             </div>
             {/* Profile  */}
 
@@ -163,6 +164,8 @@ export default function Profile({ userId }) {
          </div>
          
         </div>
+        </div>
+       
         <Calendar/>
       </div>
     </AuthProvider>
